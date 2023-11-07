@@ -1,6 +1,7 @@
 # Workshop goals
 
 Learn/review (not exactly in this order):
+- why quarto over Rmarkdown
 - markdown formatting (bold, italic, code, sections)
 - html vs. pdf
 - uses (homework, data analysis reports, research reports, papers)
