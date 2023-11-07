@@ -1,0 +1,621 @@
+---
+format: 
+  revealjs:
+    theme: ["style.scss"]
+    incremental: true
+execute: 
+  message: true
+---
+
+```{r}
+#| include: false
+library(countdown)
+```
+
+# [Quarto]{.navy-blue} <br> [documents]{.navy-blue} {background-image="figures/title-icon.png" background-position="right" background-size="contain"}
+
+## Your background {.center}
+
+Who has ever used?
+
+-   R Markdown files
+
+-   Jupyter notebooks
+
+-   LaTeX (or Overleaf)
+
+## What are Quarto documents?
+
+. . .
+
+::: columns
+::: column
+![](figures/quarto-example-raw.png)
+:::
+
+::: column
+![](figures/quarto-example-html.png)
+:::
+:::
+
+## What can I use Quarto documents for?
+
+-   research report
+
+-   (co-)writing a paper
+
+-   homework / data analysis exam
+
+. . .
+
+Also (not today)
+
+-   presentations
+
+-   interactive documents
+
+-   website
+
+## Examples
+
+Let me show you a couple of documents I created with Quarto.
+
+## Logistics
+
+-   Who brought a charged laptop with a recent RStudio installed?
+
+-   Possible re-arrangement of seats
+
+-   Clone or copy workshop folder on your laptop
+
+-   Open it as a project
+
+-   Render slides and keep them available
+
+## Workshop sections
+
+1.  Creating a Quarto document
+
+2.  Formatting
+
+3.  R code, plots and tables
+
+4.  Citations (+ Zotero)
+
+5.  Organizing lots of content
+
+## Workshop format
+
+For each section:
+
+-   quick live demo
+
+-   you practice with an exercise
+
+    -   all exercises are in the folder `practice`
+
+# 1. Creating a Quarto document
+
+## Live demo
+
+-   new document
+
+-   template components
+
+-   output format (pdf vs. html)
+
+-   editor (source vs. visual)
+
+## Practice
+
+In folder `01-create-quarto-doc`:
+
+-   create html template change title and save (in Source editor)
+
+-   create pdf template, change title and save (in Source editor)
+
+-   in one of the templates, use Visual editor to bold one word (e.g. 'enables')
+
+-   render both documents
+
+`r countdown(minutes = 3, seconds = 0, play_sound = TRUE)`
+
+## Look:
+
+When you render docs, support files are created!
+
+# 2. Formatting
+
+## Markdown syntax {.center}
+
+-   documents sections
+
+-   **bold**, *italic*, `monospace`, [links](https://quarto.org)
+
+-   lists
+
+-   equations
+
+## Sections {.center}
+
++---------------------+------------------------+
+| Markdown Syntax     | Output                 |
++=====================+========================+
+| ```                 | # Header 1 {.black}    |
+| # Header 1          |                        |
+| ```                 |                        |
++---------------------+------------------------+
+| ```                 | ## Header 2 {.black}   |
+| ## Header 2         |                        |
+| ```                 |                        |
++---------------------+------------------------+
+| ```                 | ### Header 3 {.black}  |
+| ### Header 3        |                        |
+| ```                 |                        |
++---------------------+------------------------+
+| ```                 | #### Header 4 {.black} |
+| #### Header 4       |                        |
+| ```                 |                        |
++---------------------+------------------------+
+
+## Cross-referencing sections {.center}
+
+Make sections numbered
+
+```   
+---
+format: 
+  pdf:
+    number-sections: true
+---
+```
+
+. . .
+
+Now if we add a label next to the header
+
+`# Introduction {#sec-intro}`
+
+. . .
+
+We can cross reference it later:
+
+```As described in @sec-intro```, ...
+
+. . .
+
+Which renders as
+
+> As described in Section 1, ...
+
+## Text format {.center}
+
++-----------------------------------+-----------------------------+
+| Markdown Syntax                   | Output                      |
++===================================+=============================+
+| ```                               | **bold**                    |
+| **bold**                          |                             |
+| ```                               |                             |
++-----------------------------------+-----------------------------+
+| ```                               | *italics*                   |
+| *italics*                         |                             |
+| ```                               |                             |
++-----------------------------------+-----------------------------+
+| ```                               | `verbatim code`             |
+| `verbatim code`                   |                             |
+| ```                               |                             |
++-----------------------------------+-----------------------------+
+| ```                               | [link](https://quarto.org/) |
+| [link](https://quarto.org/)       |                             |
+| ```                               |                             |
++-----------------------------------+-----------------------------+
+
+## Lists {.center}
+
+::: columns
+::: column
+```         
+ - unordered list                                                  
+                 
+                                                     
+     - sub-item 1                          
+                       
+                                              
+     - sub-item 2                                                  
+                         
+                                                                 
+        - sub-sub-item 1                                         
+```
+:::
+
+::: column
+-   unordered list
+
+    -   sub-item 1
+
+    -   sub-item 2
+
+        -   sub-sub-item 3
+:::
+:::
+
+## Numbered lists {.center}
+
+::: columns
+::: column
+```         
+
+ 1. my first tought
+ 
+ 
+ 2. then this thought                        
+                       
+                                              
+ 3. this thought next
+ 
+ 
+ 4. and finally this one!
+                                                     
+```
+:::
+
+::: column
+::: nonincremental
+1.  my first thought
+
+2.  then this thought
+
+3.  this thought next
+
+4.  and finally this one!
+:::
+:::
+:::
+
+## Numbered lists (continued) {.center}
+
+::: columns
+::: column
+```         
+
+ 1. my first tought
+ 
+ 
+ 1. then this thought                        
+                       
+                                              
+ 1. this thought next
+ 
+ 
+ 1. and finally this one!
+                                                     
+```
+:::
+
+::: column
+::: nonincremental
+1.  my first thought
+
+2.  then this thought
+
+3.  this thought next
+
+4.  and finally this one!
+:::
+:::
+:::
+
+## Equations {.center}
+
+We can embed LaTex equations in our Quarto documents!
+
+::: columns
+::: column
+```         
+
+ $$ \beta \sim \text{Normal}(0, \sigma^2) $$
+
+```
+:::
+
+::: column
+$$ \beta \sim \text{Normal}(0, \sigma^2) $$
+:::
+:::
+
+## Cross-referencing equations {.center}
+
+If we use an equation and add a label next to it
+
+```
+$$\beta \sim \text{Normal}(0, \sigma^2)$$ {#eq-lm}
+```
+
+. . .
+
+This is how it looks like
+
+$$\beta \sim \text{Normal}(0, \sigma^2)$${#eq-lm}
+
+. . .
+
+And we can cross reference it: 
+
+::: columns
+::: column
+```As shown in @eq-lm```
+:::
+::: column
+ As shown in @eq-lm
+:::
+:::
+
+## Include extra LaTex packages
+
+::: columns
+::: column
+Basic YAML
+
+```         
+---
+format: pdf
+---
+```
+:::
+
+::: column
+Include an extra library
+
+```         
+---
+format: pdf
+header-includes: |
+  \usepackage{subcaption}
+---
+```
+
+Now we can add two side-by-side figures with their captions.
+
+:::
+:::
+
+## Practice
+
+- add **section numbers**
+
+- make **Setting** a subsection of Methodology and fix its broken cross-reference
+
+- In **Setting**
+
+  - make text quoted _italic_
+  
+  - link word UNISG to UNISG's website
+
+- In **Booking methods**,  change list to numbered list
+
+- Add label to equation in **Model likelihood** so that the cross-reference in **Model priors** works 
+  
+- In **Implementation**, make package names bold:
+  - `rstan` and `lme4`
+
+`r countdown(minutes = 10, seconds = 0, play_sound = TRUE)`
+
+# 3. R code, plots and tables
+
+## Code chunks (or cells)
+
+You can add chunks by `Code\Insert Chunk` or with the keyboard shortcut Cmd + Alt + I (Mac) or Ctrl + Alt + I (Windows)
+
+```{r}
+#| echo: true
+
+library(palmerpenguins)
+
+data(penguins)
+mean(penguins$bill_length_mm, na.rm = TRUE)
+
+```
+
+## Compute summaries within the text
+
+```{r}
+#| echo: true
+
+library(palmerpenguins)
+
+data(penguins)
+mean_bill_length <- mean(penguins$bill_length_mm, na.rm = TRUE)
+
+```
+
+Then \`&#8203;r mean_bill_length\` becomes `r mean_bill_length` in text.
+
+One can also directly use \`&#8203;r mean(penguins$bill_length_mm, na.rm = TRUE)\`
+
+## Add external figures
+
+```{r}
+#| echo: fenced
+#| label: fig-brain
+#| fig-cap: "Image of human brain. Image Credit: www.hopkinsmedicine.org"
+#| out-width: 60%
+
+knitr::include_graphics("figures/brain.jpg")
+```
+
+## Make table/plot
+
+
+::: panel-tabset
+
+## Code
+
+```
+#| echo: fenced
+#| label: tbl-penguins
+#| tbl-cap: "Mean bill length, bill depth and flipper length."
+
+library(kableExtra)
+library(palmerpenguins)
+library(dplyr)
+
+penguins_summary <- penguins %>% 
+  group_by(species) %>% 
+  summarize(
+    mean_bill_length_mm = mean(bill_length_mm, na.rm = TRUE),
+    mean_bill_depth_mm = mean(bill_depth_mm, na.rm = TRUE),
+    mean_flipper_length_mm = mean(flipper_length_mm, na.rm = TRUE),
+  )
+
+kable(penguins_summary, 
+      col.names = c("Species", 
+                    "Bill length (mm)",
+                    "Bill depth (mm)",
+                    "Flipper length (mm)"),
+      digits = 1)
+
+```
+
+## Table
+
+```{r}
+#| label: tbl-penguins
+#| tbl-cap: "Mean bill length, bill depth and flipper length."
+
+library(kableExtra)
+library(palmerpenguins)
+library(dplyr)
+
+penguins_summary <- penguins %>% 
+  group_by(species) %>% 
+  summarize(
+    mean_bill_length_mm = mean(bill_length_mm, na.rm = TRUE),
+    mean_bill_depth_mm = mean(bill_depth_mm, na.rm = TRUE),
+    mean_flipper_length_mm = mean(flipper_length_mm, na.rm = TRUE),
+  )
+
+kable(penguins_summary, 
+      col.names = c("Species", 
+                    "Bill length (mm)",
+                    "Bill depth (mm)",
+                    "Flipper length (mm)"),
+      digits = 1)
+
+```
+
+:::
+
+
+## Figures
+
+Same as with tables, but use `#| fig-cap: ....`
+
+Recall, `@sec-` and `@eq-` for cross-references of sections and equations.
+
+Now, `@fig-` and `@tbl-` for cross-references of figures and tables.
+
+## Cells options
+
+There are [a lot of cells options](https://quarto.org/docs/reference/cells/cells-knitr.html#attributes) to control the execution and output of executable code blocks.
+
+For example, you can set `warning: false` and `message: false` to suppress warnings and messages in the output.
+
+```{r}
+#| echo: fenced
+#| warning: false
+#| message: false
+
+# Some code here
+```
+
+## YAML execution options
+
+Or you can set options in the YAML for the entire document!
+
+```
+---
+format: pdf
+execute: 
+  echo: false
+  message: false
+  warning: false
+---
+```
+
+## Practice
+
+- At the end of **Treatment assignment**, add the figure `crossover-design.jpg`, write a short caption, set its width to 90% and make sure it is cross-referenced correctly.
+
+- Modify YAML so that code won't show, and also hide messages and warnings
+
+- Use the code in `code.R` to fill-in the r chunks
+
+- Fill in the XXXXX in **Sample** and **Canteen attendance** with appropriate in-line code.
+
+- Add labels and write captions for the figure and the table. 
+
+- Fix reference to Table
+
+`r countdown(minutes = 10, seconds = 0, play_sound = TRUE)`
+
+# 4. References
+
+## Live demo
+
+-   Zotero -> create folder for this project
+
+-   Google Scholar -> find references and add them to Zotero folder
+
+-   RStudio, Visual editor -> add references
+
+-   Note: references.bib can be edited with row BibTex (show in Google Scholar)
+
+## Practice
+
+- Add references for **rstan** and **lme4** to your empty references.bib
+
+- Cite them in **Implementation**
+
+`r countdown(minutes = 5, seconds = 0, play_sound = TRUE)`
+
+# 5. Organizing lots of content
+
+## Child documents
+
+```
+
+---
+title: "Analysis of experiment in a university canteen"
+format: 
+  pdf:
+    number-sections: true
+execute:
+  echo: false
+  warning: false
+  message: false
+bibliography: references.bib
+---
+
+{{< include 01-methodology.qmd >}}
+
+{{< include 02-results.qmd >}}
+
+\newpage
+
+# References
+
+```
+
+## Remarks
+
+- Check locations of references and figures with respect to main document.
+
+## Practice
+
+- Combine methodology and results:
+
+  - unique YAML
+  - add title
+  - references at the end
+
+`r countdown(minutes = 5, seconds = 0, play_sound = TRUE)`

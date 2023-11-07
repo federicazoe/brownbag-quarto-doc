@@ -1,0 +1,117 @@
+---
+format: 
+  pdf: 
+    number-sections: true
+execute: 
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+library(kableExtra)
+```
+
+# Results {#sec:results}
+
+```{r}
+experiment <- read_csv("data/data.csv")
+```
+
+```{r}
+# Convert veggie_label into factor
+experiment <- experiment %>%
+  mutate(veggie_label = factor(
+    veggie_label,
+    levels = c("standard",
+               "organic",
+               "sustainable",
+               "organic-sustainable")
+    ))
+```
+
+## Descriptive results
+
+### Sample
+
+```{r subjects}
+subjects <- experiment %>% 
+  distinct(subject, italian)
+```
+
+During the duration of the experiment, a total of `r nrow(subjects)` students consumed at least one meal at the canteen.
+The majority of students had Italian nationality (`r round(mean(subjects$italian)*100)` percent).
+
+### Canteen attendance
+
+```{r}
+median_attendance <- experiment %>%
+  group_by(subject) %>%
+  summarize(N = n()) %>% 
+  pull(N) %>% 
+  median()
+
+max_attendance <- experiment %>%
+  group_by(subject) %>%
+  summarize(N = n()) %>% 
+  pull(N) %>% 
+  max()
+```
+
+```{r}
+#| label: fig-histogram
+#| fig-align: center
+#| out-width: 90%, fig.align='center'
+#| fig-cap: "Histogram of the number of days a student attended the canteen for a lunch meal."
+
+experiment %>%
+  group_by(subject) %>%
+  mutate(N = n()) %>%
+  distinct(subject, N) %>%
+  ggplot() +
+  aes(x = N) +
+  geom_histogram(binwidth = 1,
+                 color = "white",
+                 fill = "#8174a1") +
+  theme_bw() +
+  labs(x = "Number of days a student attended the canteen",
+       y = "Count") +
+  scale_x_continuous(limits = c(0, 31),
+                     breaks = seq(1, 31, by = 2))
+```
+
+@fig-histogram is a histogram of the number of days during the main study that a student attended the canteen for a lunch meal.
+Fifty percent of students attended the canteen as most `r median_attendance` times, corresponding to (`r round(median_attendance/31 * 100)`) percent of 31 possible days to attend during the main study.
+One student ate at the canteen on `r max_attendance` days, which was the maximum number of canteen visits during the main study.
+
+```{r}
+#| label: tbl-crude-prop
+#| tbl-cap: "Percentage of ordering at least one vegatable plate per menu day by plate labels."
+
+veg_orders_summary <- experiment %>% 
+  group_by(veggie_label) %>% 
+  summarize(
+    proportion_veg = mean(response)*100,
+    n_orders = length(response)
+  )
+
+knitr::kable(
+  veg_orders_summary,
+  format = "latex",
+  escape = FALSE,
+  booktabs = TRUE,
+  col.names = c(
+    "Label",
+    "Vegetable plate (\\%)",
+    "Total orders"
+  ),
+  align =  c("c", "c"),
+  digits = 2
+) %>%
+  kable_styling(latex_options = "HOLD_position")
+
+```
+
+@tbl-crude-prop summarizes the crude proportions of ordering at least one vegetable item per menu day by vegetable label type, across all menu days of the study.
+

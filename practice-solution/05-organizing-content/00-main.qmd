@@ -1,0 +1,19 @@
+---
+title: "Analysis of experiment in a university canteen"
+format: 
+  pdf:
+    number-sections: true
+execute:
+  echo: false
+  warning: false
+  message: false
+bibliography: references.bib
+---
+
+{{< include 01-methodology.qmd >}}
+
+{{< include 02-results.qmd >}}
+
+\newpage
+
+# References

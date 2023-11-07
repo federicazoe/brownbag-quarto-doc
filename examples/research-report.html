@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Federica">
+
+<title>Likelihood coarsening (summary)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="likelihood_coarsening_summary_files/libs/clipboard/clipboard.min.js"></script>
+<script src="likelihood_coarsening_summary_files/libs/quarto-html/quarto.js"></script>
+<script src="likelihood_coarsening_summary_files/libs/quarto-html/popper.min.js"></script>
+<script src="likelihood_coarsening_summary_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="likelihood_coarsening_summary_files/libs/quarto-html/anchor.min.js"></script>
+<link href="likelihood_coarsening_summary_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="likelihood_coarsening_summary_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="likelihood_coarsening_summary_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="likelihood_coarsening_summary_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="likelihood_coarsening_summary_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Likelihood coarsening (summary)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Federica </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="in-this-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="in-this-notebook">In this notebook</h2>
+<ul>
+<li>Summary of <em>Robust Bayesian Inference via Coarsening</em> (Miller and Dunson, 2019)</li>
+</ul>
+</section>
+<section id="miller-and-dunsons-work-on-power-likelihoods" class="level2">
+<h2 class="anchored" data-anchor-id="miller-and-dunsons-work-on-power-likelihoods">Miller and Dunson’s work on power likelihoods</h2>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<p>Our model <span class="math inline">\(\{P_{\theta}: \theta \in \Theta \}\)</span> is the <strong>distribution</strong> of some <strong>idealized data</strong> and we want to make inference about a <span class="math inline">\(\theta_I \in \Theta\)</span> that might be regarded as “the true state of nature”. We have a prior on this space, <span class="math inline">\(\theta \sim \pi\)</span>.</p>
+<p>The sample that we have observed <span class="math inline">\(x_1, \dots, x_N \in \mathcal{X}\)</span> is <em>not</em> distributed from <span class="math inline">\(P_{\theta_I}\)</span>, but is distributed iid according to some unknown <span class="math inline">\(P_o\)</span> which is close to <span class="math inline">\(P_{\theta_I}\)</span> according to a measure of <strong>discrepancy</strong> <span class="math inline">\(d(\cdot, \cdot)\)</span>.</p>
+<p>More precisely, we assume that the empirical distribution <span class="math inline">\(\hat{P}_{x_{1:N}}\)</span> of the observed sample is close to the empirical distribution <span class="math inline">\(\hat{P}_{X_{1:N}}\)</span> of an <em>unobserved</em> idealized dataset <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} P_{\theta_I}\)</span> of size <span class="math inline">\(N\)</span>, that is:</p>
+<p><span class="math display">\[d(\hat{P}_{X_{1:N}}, \hat{P}_{x_{1:N}}) &lt; r\]</span> for some <span class="math inline">\(r &gt; 0\)</span>. Our <em>coarsened posterior</em> is then <span class="math inline">\(\pi(\theta \mid d(\hat{P}_{X_{1:N}}, \hat{P}_{x_{1:N}}) &lt; r)\)</span>.</p>
+<!--  Further assuming that $P_{\theta}$ and $P_{o}$ have densities $p_{\theta}$ and $p_o$ with respect to a measure $\lambda$ (e.g. Lebesgue or counting measure), we have that $d_n(X_{1:N}, x_{1:N}) := d(\hat{P}_{X_{1:N}}, \hat{P}_{x_{1:N}})$ is a consistent estimator of the divergence $d(P_{\theta}, P_{o})$ between the idealized and observed-data distributions. -->
+<p>If we choose the discrepancy <span class="math inline">\(d(\cdot, \cdot)\)</span> to be the relative entropy, i.e.&nbsp;the Kullbach-Leibler divergence, and if we assume</p>
+<!--  $$ d(P_{\theta}, P_{o}) = \int p_o(x) \log\dfrac{p_o(x)}{p_{\theta}(x)} \lambda(\text{d}x)$$ -->
+<p><span class="math display">\[r \sim \text{Exp}(\alpha)\]</span></p>
+<p>then the posterior corresponding to conditioning on the event <span class="math inline">\(\mathcal{1}(d_n(X_{1:N}, x_{1:N} &lt; r)\)</span> is <strong>well-approximated</strong> by the <strong>power posterior</strong>, that is</p>
+<p><span class="math display">\[ P(\theta \mid d_n(X_{1:N}, x_{1:N}) &lt; r) \overset{\propto}{\sim} \pi (\theta) \prod_{i = 1}^{N} p_{\theta}(x_i)^{\zeta(n, \alpha)} \]</span></p>
+<p>where</p>
+<p><span class="math display">\[\zeta(n, \alpha) = \dfrac{\alpha}{\alpha + n}.\]</span></p>
+<p>This approximation works well for <strong>small</strong> <span class="math inline">\(n\)</span> (when <span class="math inline">\(\zeta(n, \alpha) \approx 1\)</span>) and for <strong>large</strong> <span class="math inline">\(n\)</span> (when <span class="math inline">\(\zeta(n, \alpha) \approx \frac{\alpha}{n}\)</span>). So the power posterior is defined as the distribution proportional to <span class="math inline">\(\pi (\theta) \prod_{i = 1}^{N} p_{\theta}(x_i)^{\zeta}\)</span> and the <strong>power likelihood</strong> is defined as <span class="math inline">\(\prod_{i = 1}^{N} p_{\theta}(x_i)^{\zeta}\)</span>.</p>
+</section>
+<section id="power-posterior-for-mixture-modeling" class="level3">
+<h3 class="anchored" data-anchor-id="power-posterior-for-mixture-modeling">Power posterior for mixture modeling</h3>
+<p>When the traditional likelihood is a <strong>finite mixture distribution</strong></p>
+<p><span class="math display">\[ P_{\theta}(x) = \sum_{k = 1}^K \omega_k f_{\phi_k} (x),\]</span> we have that <span class="math inline">\(\omega_k\)</span> are the component weights, <span class="math inline">\(f_{\phi_k} (x) \in \{f_{\phi} : \phi \in \Phi \}\)</span> are the component distributions, and the power-likelihood is</p>
+<p><span class="math display">\[ \prod_{i = 1}^{N} \left( \sum_{k = 1}^K \omega_k f_{\phi_k} (x_i) \right)^{\zeta(n, \alpha)}\]</span> so the power posterior is</p>
+<p><span class="math display">\[\pi_{\alpha}(\omega, \phi \mid x_{1:N}) \propto \pi(\omega, \phi)  \prod_{i = 1}^{N} \left( \sum_{k = 1}^K \omega_k f_{\phi_k} (x_i) \right)^{\zeta(n, \alpha)}\]</span></p>
+<p>Miller and Dunson observe that the standard approach of fitting a mixture model using data augmentation with latent assignment variables <span class="math inline">\((z_1, \dots, z_N) \in \{1, \dots, K\}\)</span>, that assign one component to each data point, cannot be applied directly with the power likelihood. However, they still suggest and employ an algorithm that “<em>yields results similar to (but not exactly the same as) the power posterior</em>”. The algorithm uses the <strong>power likelihood</strong> in the <strong>resampling</strong> of <strong>component weights and distribution parameters</strong> but <strong>not</strong> in the resampling of the <strong>assignment variables</strong>:</p>
+<p><img src="img/conditional_coarsening_algorithm.png" class="img-fluid" style="width:50.0%"></p>
+<p>In the supplementary material S7.2.1. they say that this approach was chosen because it turns out to be equivalent to approximating the posterior with <span class="math inline">\(q(\omega, \phi) \propto \pi(\omega, \phi) \prod_{i = 1}^{N} \left(w_{z_i} f_{\phi_{z_i}}(x_i) \right)^{\zeta(\alpha, n)}\)</span>.</p>
+<p>To help “<em>escaping from local optima in which one cluster needs to be split into two or more clusters</em>” they also suggest to add a step between steps 1 and 2 in the algorithm above, during the first <span class="math inline">\(T_{\text{init}}\)</span> MCMC iterations. In this step, every <span class="math inline">\(S\)</span> iterations, if there are <span class="math inline">\(k_n\)</span> empty clusters, the largest <span class="math inline">\(k_n\)</span> clusters are randomly split into two clusters.</p>
+</section>
+<section id="important-properties" class="level3">
+<h3 class="anchored" data-anchor-id="important-properties">Important properties</h3>
+<p>Interesting points to clarify and properties of the power likelihood/posterior approach are:</p>
+<ul>
+<li><p>The power likelihood does <em>not</em> imply a distribution on <span class="math inline">\(x_{1:N}\)</span> given <span class="math inline">\(\theta\)</span>, so it does not involve a <span class="math inline">\(\theta\)</span>-dependent normalization constant. Thus, the power posterior is <em>not</em> equivalent to the traditional posterior under a model with tempered density <span class="math inline">\(\hat{f}(x \mid \theta, \zeta) \propto p_{\theta}(x)^{\zeta_{n}}\)</span>. It follows that the power likelihood approach is <strong>not equivalent to renormalized tempering</strong> or overdispersion.</p></li>
+<li><p>A useful interpretation is that the power posterior is only as concentrated as if the sample was of size <span class="math inline">\(\zeta n &lt; n\)</span> (<strong>sample-size adjustement</strong>). ALso, the power-likelihood does <em>not</em> concentrate for <span class="math inline">\(n \rightarrow \infty\)</span> as this is <em>not wanted</em> if we assume that, no-matter the sample size, there exist a discrepancy between observed and idealized data distributions.</p></li>
+<li><p>A <strong>disandvantage</strong> of this approach is that if <span class="math inline">\(\alpha\)</span> is small then too much coarsening might be applied and the power posterior might underestimate model complexity and produce too large credible sets.</p></li>
+</ul>
+</section>
+<section id="their-results-on-mixtures" class="level3">
+<h3 class="anchored" data-anchor-id="their-results-on-mixtures">Their results on mixtures</h3>
+<p>They empirically confirm two theoretically-expected benefits of using a power likelihood:</p>
+<ul>
+<li><p>More accurate estimation of the number of clusters in the presence of (even slight) discrepancy between observed and idealized data likelihoods. In particular, the power likelihood seems to help avoiding the creation of spurious, very small clusters that are commonly found due to likelihood mispecification.</p></li>
+<li><p>On flow cytometry data with ground truth manual cluster annotations, power likelihood leads to clusters which are much closer to the ground truth ones than with a traditional mixture of gaussians likelihood.</p></li>
+</ul>
+</section>
+<section id="method-for-choosing-alpha" class="level3">
+<h3 class="anchored" data-anchor-id="method-for-choosing-alpha">Method for choosing <span class="math inline">\(\alpha\)</span></h3>
+<p>They propose a data-driven method for choosing <span class="math inline">\(\alpha\)</span>, the parameter that determines the power <span class="math inline">\(\zeta(n, \alpha)\)</span> of the power likelihood.</p>
+<p>This method consists of trying several values of <span class="math inline">\(\alpha\)</span> and computing a measure of fit and a measure of model complexity for the power posterior estimated with that <span class="math inline">\(\alpha\)</span> (e.g., in a MCMC sampler, obtain the average measures of fit and model complexity across iterations) and then choose the value of <span class="math inline">\(\alpha\)</span> corresponding to relatively high model fit for relatively low complexity.</p>
+<p>This method can be computationally expensive and requires problem-specific choice of good measures of model fit and complexity.</p>
+<p>Another data-driven way of choosing <span class="math inline">\(\alpha\)</span> is again trying a range of values on some train data and choose the one that performs best on some test data according to some performance measure.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

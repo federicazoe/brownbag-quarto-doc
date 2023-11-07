@@ -1,0 +1,58 @@
+---
+format: 
+  pdf: 
+    number-sections: true
+execute: 
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+
+# LOAD LIBRARIES HERE
+
+```
+
+# Results {#sec:results}
+
+```{r}
+
+# LOAD DATA HERE
+
+```
+
+
+## Descriptive results
+
+### Sample
+
+During the duration of the experiment, a total of **XXXX** students consumed at least one meal at the canteen.
+The majority of students had Italian nationality (**XXXX** percent).
+
+### Canteen attendance
+
+```{r}
+
+# MEDIAN AND MODE OF CANTEEN ATTENDANCE
+
+```
+
+```{r}
+
+# MAKE HISTOGRAM HERE
+
+```
+
+@fig-histogram is a histogram of the number of days during the main study that a student attended the canteen for a lunch meal.
+Fifty percent of students attended the canteen as most **XXXXX** times, corresponding to (**r round(median_attendance/31 * 100)**) percent of 31 possible days to attend during the main study.
+One student ate at the canteen on **r max_attendance days**, which was the maximum number of canteen visits during the main study.
+
+```{r}
+
+# MAKE TABLE HERE
+
+```
+
+**TABLE XXXXX** summarizes the crude proportions of ordering at least one vegetable item per menu day by vegetable label type, across all menu days of the study.
+

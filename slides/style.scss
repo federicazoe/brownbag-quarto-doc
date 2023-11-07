@@ -1,0 +1,124 @@
+//Fonts
+
+/*-- scss:defaults --*/
+
+$slideTitleColor: #5380c3;
+$slideSectionColor: #4aad85;
+
+$mainFontSize: 35px;
+$backgroundColor: #fefaf3;
+$mainColor: $slideTitleColor;
+
+// Links and actions
+$linkColor: #05445E;
+$linkColorHover: darken( $linkColor, 20% );
+
+
+/*-- scss:rules --*/
+
+.slide-background {
+  background-color: #fefaf3;
+}
+
+.reveal section h1 {
+  color: $slideSectionColor;
+}
+
+.reveal section h2 {
+  color: #05445E;
+}
+
+.reveal section h3 {
+  color: $slideSectionColor;
+;
+}
+
+.reveal section h4 {
+  color: black;
+;
+}
+
+.reveal section a {
+  color: $slideTitleColor;
+}
+
+.reveal section strong {
+  color: $slideTitleColor;
+}
+
+.reveal .slide .note {
+  border-left: 5px solid  #000000;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  background:#fcece0;
+}
+
+.reveal .light-green {
+  color: #91E1D7;
+}
+
+.reveal .medium-green {
+  color: $slideSectionColor;
+}
+
+.reveal .light-blue {
+  color: #91c3e1;
+}
+
+.reveal .dark-blue {
+  color: #000C66;
+}
+
+.reveal .navy-blue {
+  color: #05445E;
+}
+
+
+.reveal .maroon {
+  color: maroon;
+}
+
+.reveal .black {
+  color: black;
+}
+.reveal .white {
+  color: white;
+}
+
+.reveal .orange {
+  color: #ce7e00;
+}
+
+.reveal .dark-pink {
+  color: #964572;
+}
+
+.reveal .increased-line p {
+    line-height: 3;
+}
+
+* {
+  color:#000000;
+}
+
+// Uncomment to move slide number to bottom right
+//.slide-number, .reveal.has-logo .slide-number {
+//  bottom: 5% !important;
+//  left: 93% !important;
+//  top: unset !important;
+//}
+
+.font25{font-size:25px}
+.font50{font-size:50px}
+.font75{font-size:75px}
+.font100{font-size:100px}
+.font150{font-size:150px}
+
+
+.v-center-container {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
