@@ -508,7 +508,7 @@ kable(penguins_summary,
 
 ## Figures
 
-Same as with tables, but use `#| fig-cap: ....`
+Same as with tables, but use `#| label: fig-yourchoice`
 
 Recall, `@sec-` and `@eq-` for cross-references of sections and equations.
 
