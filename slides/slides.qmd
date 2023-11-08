@@ -60,6 +60,8 @@ Also (not today)
 
 Let me show you a couple of documents I created with Quarto.
 
+You can find them in the folder `examples`.
+
 ## Logistics
 
 -   Who brought a charged laptop with a recent RStudio installed?
@@ -92,7 +94,7 @@ For each section:
 
 -   you practice with an exercise
 
-    -   all exercises are in the folder `practice`
+    -   the folder `practice` has one subfolder per workshop section (except section 1)
 
 # 1. Creating a Quarto document
 
@@ -108,9 +110,9 @@ For each section:
 
 ## Practice
 
-In folder `01-create-quarto-doc`:
+In `practice`, create folder `01-create-quarto-doc` and:
 
--   create html template change title and save (in Source editor)
+-   create html template, change title and save (in Source editor)
 
 -   create pdf template, change title and save (in Source editor)
 
@@ -564,11 +566,13 @@ execute:
 
 -   Zotero -> create folder for this project
 
--   Google Scholar -> find references and add them to Zotero folder
+-   Google Scholar -> find references and add them to Zotero folder[^1]
 
 -   RStudio, Visual editor -> add references
 
 -   Note: references.bib can be edited with row BibTex (show in Google Scholar)
+
+[^1]: this requires the [Zotero connector](https://chrome.google.com/webstore/detail/zotero-connector/ekhagklcjbdpajgpjgmbionohlpdbjgc) Chrome extension
 
 ## Practice
 
