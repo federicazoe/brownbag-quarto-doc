@@ -10,7 +10,7 @@ $backgroundColor: #fefaf3;
 $mainColor: $slideTitleColor;
 
 // Links and actions
-$linkColor: #05445E;
+$linkColor: #ce7e00;
 $linkColorHover: darken( $linkColor, 20% );
 
 
@@ -39,11 +39,11 @@ $linkColorHover: darken( $linkColor, 20% );
 }
 
 .reveal section a {
-  color: $slideTitleColor;
+  color: $linkColor;
 }
 
 .reveal section strong {
-  color: $slideTitleColor;
+  color: #5380c3;
 }
 
 .reveal .slide .note {

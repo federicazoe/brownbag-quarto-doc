@@ -14,6 +14,10 @@ library(countdown)
 
 # [Quarto]{.navy-blue} <br> [documents]{.navy-blue} {background-image="figures/title-icon.png" background-position="right" background-size="contain"}
 
+[Federica Zoe Ricci](https://federicazoe.github.io/)
+
+[November 2023]{.navy-blue}
+
 ## Your background {.center}
 
 Who has ever used?
@@ -623,3 +627,12 @@ bibliography: references.bib
   - references at the end
 
 `r countdown(minutes = 5, seconds = 0, play_sound = TRUE)`
+
+## Resources & Acknowledgements
+
+- [Getting Started with Quarto](https://rstudio-conf-2022.github.io/get-started-quarto/) - RStudio conference workshop (2022)
+
+- [Create Awesome Tables with kableExtra!](https://haozhu233.github.io/kableExtra/) 
+
+- Data scientist icon on title slide from [glebb](https://www.cleanpng.com/users/@glebb.html)
+
