@@ -34,3 +34,6 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 brownbag-quarto-doc.Rproj
+
+.DS_Store
+
