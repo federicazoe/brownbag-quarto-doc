@@ -18,6 +18,7 @@ library(countdown)
 
 [November 2023]{.navy-blue}
 
+
 ## Your background {.center}
 
 Who has ever used?
@@ -72,7 +73,7 @@ You can find them in the folder `examples`.
 
 -   Possible re-arrangement of seats
 
--   Clone or copy workshop folder on your laptop
+-   Clone or copy workshop folder on your laptop: [github.com/federicazoe/brownbag-quarto-doc](https://github.com/federicazoe/brownbag-quarto-doc)
 
 -   Open it as a project
 
